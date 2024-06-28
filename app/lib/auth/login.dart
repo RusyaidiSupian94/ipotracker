@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:app/theme/theme_provider.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
@@ -9,6 +11,14 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        actions: [
+          Switch(
+            value: Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark,
+            onChanged: (value) {
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme(value);
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
